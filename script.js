@@ -1,6 +1,7 @@
 const translations = {
     en: {
-        title: 'Markdown and HTML Converter for Wordpress',
+        title: 'Markdown and HTML Converter',
+        subtitle: 'Specially designed for Wordpress publishing, HTML page generation and more',
         md2html: 'Markdown to HTML',
         html2md: 'HTML to Markdown',
         removeCitations: 'Remove Citations (From Perplexity.ai)',
@@ -15,7 +16,8 @@ const translations = {
         copyError: 'Copy failed, please copy manually'
     },
     zh: {
-        title: 'Markdown 和 HTML 双向转换 - 用于 Wordpress 内容站',
+        title: 'Markdown 和 HTML 双向转换',
+        subtitle: '特别用于 Wordpress 内容发表、HTML 网页生成等场景',
         md2html: 'Markdown 转 HTML',
         html2md: 'HTML 转 Markdown',
         removeCitations: '去除引文(来自 Perplexity.ai)',
@@ -31,11 +33,13 @@ const translations = {
     }
 };
 
-let currentLang = 'en';
+let currentLang = 'zh';
 
-// 检查是否在中文路径
-if (window.location.pathname.includes('/zh')) {
-    currentLang = 'zh';
+// 检查是否在英文路径
+if (window.location.pathname.includes('/en')) {
+    currentLang = 'en';
+    document.documentElement.lang = 'en';
+} else {
     document.documentElement.lang = 'zh-CN';
 }
 
@@ -75,7 +79,7 @@ function updateLanguage() {
 
 function toggleLanguage() {
     const newLang = currentLang === 'zh' ? 'en' : 'zh';
-    const newPath = newLang === 'zh' ? '/zh' : '/';
+    const newPath = newLang === 'en' ? '/en' : '/';
     window.history.pushState({}, '', newPath);
     currentLang = newLang;
     document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
@@ -103,8 +107,8 @@ function switchMode() {
         inputArea.placeholder = translations[currentLang].inputPlaceholder;
         citationControl.style.display = 'flex';
     } else {
-        inputTitle.textContent = 'HTML ' + translations[currentLang].inputTitle;
-        outputTitle.textContent = 'Markdown ' + translations[currentLang].outputTitle;
+        inputTitle.textContent = 'HTML 输入';
+        outputTitle.textContent = 'Markdown 输出';
         inputArea.placeholder = translations[currentLang].inputPlaceholder;
         citationControl.style.display = 'none';
     }
@@ -122,9 +126,7 @@ function convert() {
         if (removeCitationsChecked) {
             input = removeCitations(input);
         }
-        const htmlOutput = marked.parse(input);
-        const wrappedOutput = `<div class="content">\n  ${htmlOutput.trim().replace(/\n/g, '\n  ')}\n</div>`;
-        outputArea.textContent = wrappedOutput;
+        outputArea.textContent = marked.parse(input);
     } else {
         outputArea.textContent = turndownService.turndown(input);
     }

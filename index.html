@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD2HTML - Markdown Converter</title>
+    <title>MD2HTML - Markdown 转换工具</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -29,51 +29,52 @@
         <div class="navbar-container">
             <a href="/" class="logo">MD2HTML</a>
             <div class="navbar-controls">
-                <button class="theme-switch" onclick="toggleTheme()" aria-label="Toggle theme">
+                <button class="theme-switch" onclick="toggleTheme()" aria-label="切换主题">
                     <span class="theme-icon">🌙</span>
                 </button>
-                <button class="lang-switch" onclick="toggleLanguage()">中文</button>
+                <button class="lang-switch" onclick="toggleLanguage()">English</button>
             </div>
         </div>
     </nav>
 
     <div class="main-content">
         <div class="header">
-            <h1 data-i18n="title">Markdown and HTML Converter for Wordpress</h1>
+            <h1 data-i18n="title">Markdown 和 HTML 双向转换</h1>
+            <p class="subtitle" data-i18n="subtitle">特别用于 Wordpress 内容发表、HTML 网页生成等场景</p>
         </div>
 
         <div class="controls">
             <div class="mode-switch">
-                <select id="convert-mode" onchange="switchMode()" aria-label="Conversion mode">
-                    <option value="md2html" data-i18n="md2html">Markdown to HTML</option>
-                    <option value="html2md" data-i18n="html2md">HTML to Markdown</option>
+                <select id="convert-mode" onchange="switchMode()" aria-label="转换模式">
+                    <option value="md2html" data-i18n="md2html">Markdown 转 HTML</option>
+                    <option value="html2md" data-i18n="html2md">HTML 转 Markdown</option>
                 </select>
             </div>
             <div class="citation-control" id="citation-control">
                 <input type="checkbox" id="remove-citations" checked>
-                <label for="remove-citations" data-i18n="removeCitations">Remove Citations (FromPerplexity.ai)</label>
+                <label for="remove-citations" data-i18n="removeCitations">去除引文(来自 Perplexity.ai)</label>
             </div>
         </div>
 
         <div class="container">
             <div>
                 <div class="input-label">
-                    <h2 id="input-title" data-i18n="inputTitle">Markdown Input</h2>
-                    <button onclick="clearInput()" data-i18n="clearInput">Clear Input</button>
+                    <h2 id="input-title" data-i18n="inputTitle">Markdown 输入</h2>
+                    <button onclick="clearInput()" data-i18n="clearInput">清空输入</button>
                 </div>
-                <textarea id="input-area" data-i18n-placeholder="inputPlaceholder" placeholder="Enter your content here..."></textarea>
+                <textarea id="input-area" data-i18n-placeholder="inputPlaceholder" placeholder="在这里输入内容..."></textarea>
             </div>
             <div>
                 <div class="output-label">
-                    <h2 id="output-title" data-i18n="outputTitle">HTML Output</h2>
-                    <button onclick="clearOutput()" data-i18n="clearOutput">Clear Output</button>
+                    <h2 id="output-title" data-i18n="outputTitle">HTML 输出</h2>
+                    <button onclick="clearOutput()" data-i18n="clearOutput">清空输出</button>
                 </div>
                 <div class="output" id="output-area"></div>
             </div>
         </div>
         <div class="buttons">
-            <button onclick="convert()" data-i18n="convert">Convert</button>
-            <button onclick="copyOutput()" data-i18n="copy">Copy Output</button>
+            <button onclick="convert()" data-i18n="convert">转换</button>
+            <button onclick="copyOutput()" data-i18n="copy">复制输出</button>
         </div>
     </div>
 
