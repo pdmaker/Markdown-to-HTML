@@ -3,31 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <title>MD2HTML - Markdown 转换工具</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        :root {
-            --background: #ffffff;
-            --foreground: #020817;
-            --muted: #f1f5f9;
-            --muted-foreground: #64748b;
-            --border: #e2e8f0;
-            --input: #e2e8f0;
-            --primary: #18181b;
-            --primary-foreground: #ffffff;
-            --ring: #18181b;
-            --radius: 0.5rem;
-            --navbar-bg: #ffffff;
-            --navbar-border: #e2e8f0;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="/" class="logo">MD2HTML</a>
+            <div class="brand">
+                <img src="images/logo.png" alt="MD2HTML Logo" class="logo-image" width="24" height="24">
+                <a href="/" class="logo">MD2HTML</a>
+            </div>
             <div class="navbar-controls">
                 <button class="theme-switch" onclick="toggleTheme()" aria-label="切换主题">
                     <span class="theme-icon">🌙</span>

@@ -60,17 +60,29 @@ function updateThemeIcon() {
 }
 
 function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
     document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
     updateThemeIcon();
 }
 
 // 检查系统主题偏好并设置初始主题
 function initializeTheme() {
+    // 先检查本地存储是否有保存的主题设置
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcon();
+        return;
+    }
+    
+    // 如果没有保存的设置，则检查系统偏好
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = prefersDark ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', initialTheme);
+    localStorage.setItem('theme', initialTheme);
     updateThemeIcon();
 }
 
@@ -330,3 +342,6 @@ function updateButtonStates() {
 
 // 初始化时调用一次
 updateButtonStates();
+
+// 确保在 DOM 加载完成后初始化主题
+document.addEventListener('DOMContentLoaded', initializeTheme);

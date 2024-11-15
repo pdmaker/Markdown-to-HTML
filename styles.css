@@ -671,3 +671,27 @@ button:disabled {
     cursor: not-allowed;
     pointer-events: none;
 }
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-image {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+/* 在移动端适配中 */
+@media (max-width: 640px) {
+    .brand {
+        gap: 0.5rem;
+    }
+    
+    .logo-image {
+        width: 24px;
+        height: 24px;
+    }
+}
