@@ -1,0 +1,245 @@
+
+[data-theme="dark"] {
+    --background: #020817;
+    --foreground: #ffffff;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --border: #1e293b;
+    --input: #1e293b;
+    --primary: #ffffff;
+    --primary-foreground: #020817;
+    --ring: #cbd5e1;
+    --navbar-bg: #0f172a;
+    --navbar-border: #1e293b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--foreground);
+    text-decoration: none;
+    letter-spacing: -0.025em;
+}
+
+.navbar-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.theme-switch, .lang-switch {
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--foreground);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.theme-switch:hover, .lang-switch:hover {
+    background-color: var(--muted);
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: minmax(400px, 1fr) minmax(400px, 1fr);
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+textarea {
+    width: 100%;
+    height: 500px;
+    padding: 0.75rem;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--foreground);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    resize: vertical;
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.output {
+    height: 500px;
+    padding: 0.75rem;
+    background-color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.mode-switch {
+    flex: 1;
+}
+
+.citation-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.citation-control input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    cursor: pointer;
+}
+
+select {
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+    background-color: var(--background);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    appearance: none;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+.buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.input-label, .output-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.input-label button, .output-label button {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--muted-foreground);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.input-label button:hover, .output-label button:hover {
+    background-color: var(--muted);
+}
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    
+    textarea, .output {
+        min-width: 100%;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
