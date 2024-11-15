@@ -494,7 +494,7 @@ button:focus {
     opacity: 1;
 }
 
-/* 让输出区域看起来可点�� */
+/* 让输出区域看起来可点击 */
 #output-wrapper .output {
     cursor: pointer;
 }
@@ -503,28 +503,24 @@ button:focus {
     background: var(--muted);
 }
 
-/* 添加链接样式 */
-.citation-control a {
+.perplexity-link {
     color: var(--primary);
     text-decoration: none;
+    font-weight: 500;
     padding: 0.1em 0.3em;
     border-radius: var(--radius);
     transition: all 0.2s ease;
-    font-weight: 500;
+}
+
+.perplexity-link:hover {
     background: var(--muted);
+    text-decoration: underline;
 }
 
-.citation-control a:hover {
-    background: var(--primary);
-    color: var(--primary-foreground);
+[data-theme="dark"] .perplexity-link {
+    color: #94a3b8;
 }
 
-[data-theme="dark"] .citation-control a {
-    color: var(--muted-foreground);
-    background: var(--muted);
-}
-
-[data-theme="dark"] .citation-control a:hover {
-    color: var(--background);
-    background: var(--foreground);
+[data-theme="dark"] .perplexity-link:hover {
+    color: var(--foreground);
 }

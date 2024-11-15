@@ -4,7 +4,7 @@ const translations = {
         subtitle: 'Specially designed for Wordpress publishing, HTML page generation and more',
         md2html: 'Markdown to HTML',
         html2md: 'HTML to Markdown',
-        removeCitations: 'Remove Citations (From <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" target="_blank">Perplexity.ai</a>)',
+        removeCitations: 'Remove Citations (From <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" class="perplexity-link" target="_blank" rel="noopener">Perplexity.ai</a>)',
         inputTitle: 'Markdown Input',
         outputTitle: 'HTML Output',
         clearInput: 'Clear Input',
@@ -25,7 +25,7 @@ const translations = {
         subtitle: '特别用于 Wordpress 内容发表、HTML 网页生成等场景',
         md2html: 'Markdown 转 HTML',
         html2md: 'HTML 转 Markdown',
-        removeCitations: '去除引文(来自 <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" target="_blank">Perplexity.ai</a>)',
+        removeCitations: '去除引文(来自 <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" class="perplexity-link" target="_blank" rel="noopener">Perplexity.ai</a>)',
         inputTitle: 'Markdown 输入',
         outputTitle: 'HTML 输出',
         clearInput: '清空输入',
@@ -77,7 +77,11 @@ function initializeTheme() {
 function updateLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        element.innerHTML = translations[currentLang][key];
+        if (key === 'removeCitations') {
+            element.innerHTML = translations[currentLang][key];
+        } else {
+            element.textContent = translations[currentLang][key];
+        }
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
