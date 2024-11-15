@@ -1,9 +1,9 @@
 const translations = {
     en: {
-        title: 'Markdown and HTML Converter',
+        title: 'Markdown and HTML Converter for Wordpress',
         md2html: 'Markdown to HTML',
         html2md: 'HTML to Markdown',
-        removeCitations: 'Remove Citations',
+        removeCitations: 'Remove Citations (From Perplexity.ai)',
         inputTitle: 'Markdown Input',
         outputTitle: 'HTML Output',
         clearInput: 'Clear Input',
@@ -15,10 +15,10 @@ const translations = {
         copyError: 'Copy failed, please copy manually'
     },
     zh: {
-        title: 'Markdown 和 HTML 双向转换工具',
+        title: 'Markdown 和 HTML 双向转换 - 用于 Wordpress 内容站',
         md2html: 'Markdown 转 HTML',
         html2md: 'HTML 转 Markdown',
-        removeCitations: '去除引文',
+        removeCitations: '去除引文(来自 Perplexity.ai)',
         inputTitle: 'Markdown 输入',
         outputTitle: 'HTML 输出',
         clearInput: '清空输入',
