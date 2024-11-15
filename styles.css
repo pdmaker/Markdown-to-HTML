@@ -142,35 +142,51 @@ textarea:focus {
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
     margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.header h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--muted-foreground);
 }
 
 .controls {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 1rem;
     align-items: center;
-    margin-bottom: 1.5rem;
 }
 
 .mode-switch {
     flex: 1;
+    min-width: 200px;
 }
 
 .citation-control {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-left: auto;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
 }
 
 .citation-control input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background-color: var(--background);
-    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
 }
 
 select {
@@ -523,4 +539,135 @@ button:focus {
 
 [data-theme="dark"] .perplexity-link:hover {
     color: var(--foreground);
+}
+
+/* 调整 header 部分的响应式布局 */
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.header h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--muted-foreground);
+}
+
+/* 调整控制区域的响应式布局 */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.mode-switch {
+    flex: 1;
+    min-width: 200px;
+}
+
+.citation-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+.citation-control input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+    .citation-control {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* 修改导航栏的响应式布局 */
+@media (max-width: 640px) {
+    .navbar {
+        padding: 0.75rem;  /* 减小内边距 */
+    }
+
+    .navbar-container {
+        flex-direction: row;  /* 改回横向排列 */
+        justify-content: space-between;  /* 两端对齐 */
+        align-items: center;
+        padding: 0;
+        gap: 0.5rem;  /* 减小间距 */
+    }
+
+    .logo {
+        font-size: 1.25rem;  /* 稍微减小 logo 字体大小 */
+    }
+
+    .navbar-controls {
+        gap: 0.5rem;  /* 减小控制按钮之间的间距 */
+    }
+
+    .theme-switch, .lang-switch {
+        padding: 0.35rem;  /* 减小按钮内边距 */
+        font-size: 0.875rem;  /* 减小按钮文字大小 */
+    }
+}
+
+/* 调整中等屏幕的布局 */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .header h1 {
+        font-size: 1.75rem;
+    }
+
+    .main-content {
+        padding: 1.25rem;
+    }
+}
+
+/* 优化按钮在移动端的显示 */
+.buttons button {
+    width: 100%;
+    padding: 0.5rem;
+    white-space: nowrap;
+}
+
+/* 优化链接在移动端的显示 */
+.perplexity-link {
+    display: inline-block;
+    margin: 0.2em 0;
+}
+
+/* 优化 Toast 在移动端的显示 */
+@media (max-width: 640px) {
+    .toast {
+        width: calc(100% - 2rem);
+        margin: 0 1rem;
+        text-align: center;
+    }
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 }

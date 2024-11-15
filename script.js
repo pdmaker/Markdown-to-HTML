@@ -154,6 +154,9 @@ function convert() {
         previewArea.textContent = markdownOutput;
         rawArea.textContent = markdownOutput;
     }
+    
+    // 更新按钮状态
+    updateButtonStates();
 }
 
 function copyOutput() {
@@ -168,11 +171,15 @@ function copyOutput() {
 function clearInput() {
     document.getElementById('input-area').value = '';
     convert();
+    // 更新按钮状态
+    updateButtonStates();
 }
 
 function clearOutput() {
     document.getElementById('preview-area').innerHTML = '';
     document.getElementById('raw-area').textContent = '';
+    // 更新按钮状态
+    updateButtonStates();
 }
 
 document.getElementById('input-area').addEventListener('input', convert);
@@ -309,3 +316,17 @@ function downloadHtml() {
     // 显示提示
     showToast(translations[currentLang].copySuccess);
 }
+
+// 添加按钮状态控制函数
+function updateButtonStates() {
+    const rawArea = document.getElementById('raw-area');
+    const copyButton = document.querySelector('button[onclick="copyOutput()"]');
+    const downloadButton = document.querySelector('button[onclick="downloadHtml()"]');
+    
+    const isEmpty = !rawArea.textContent.trim();
+    copyButton.disabled = isEmpty;
+    downloadButton.disabled = isEmpty;
+}
+
+// 初始化时调用一次
+updateButtonStates();
