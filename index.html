@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,9 +67,12 @@
             <div>
                 <div class="output-label">
                     <h2 id="output-title" data-i18n="outputTitle">HTML 输出</h2>
-                    <button onclick="clearOutput()" data-i18n="clearOutput">清空输出</button>
+                    <button class="preview-btn" onclick="togglePreview()" data-i18n="preview">预览 HTML</button>
                 </div>
-                <div class="output" id="output-area"></div>
+                <div id="output-wrapper">
+                    <div id="raw-area" class="output active"></div>
+                    <div id="preview-area" class="output"></div>
+                </div>
             </div>
         </div>
         <div class="buttons">
@@ -79,5 +82,6 @@
     </div>
 
     <script src="script.js"></script>
+    <div class="toast" id="toast"></div>
 </body>
 </html>

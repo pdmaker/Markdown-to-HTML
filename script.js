@@ -13,7 +13,11 @@ const translations = {
         convert: 'Convert',
         copy: 'Copy Output',
         copySuccess: 'Content copied to clipboard!',
-        copyError: 'Copy failed, please copy manually'
+        copyError: 'Copy failed, please copy manually',
+        preview: 'Preview HTML',
+        togglePreview: 'Hide Preview',
+        showPreview: 'Show Preview',
+        rawHtml: 'Show HTML'
     },
     zh: {
         title: 'Markdown 和 HTML 双向转换',
@@ -29,7 +33,11 @@ const translations = {
         convert: '转换',
         copy: '复制输出',
         copySuccess: '内容已复制到剪贴板！',
-        copyError: '复制失败，请手动复制'
+        copyError: '复制失败，请手动复制',
+        preview: '预览 HTML',
+        togglePreview: '隐藏预览',
+        showPreview: '显示预览',
+        rawHtml: '显示 HTML'
     }
 };
 
@@ -56,9 +64,11 @@ function toggleTheme() {
     updateThemeIcon();
 }
 
-// 检查系统主题偏好
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+// 检查系统主题偏好并设置初始主题
+function initializeTheme() {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = prefersDark ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', initialTheme);
     updateThemeIcon();
 }
 
@@ -100,17 +110,20 @@ function switchMode() {
     const inputTitle = document.getElementById('input-title');
     const outputTitle = document.getElementById('output-title');
     const inputArea = document.getElementById('input-area');
+    const previewArea = document.getElementById('preview-area');
 
     if (currentMode === 'md2html') {
         inputTitle.textContent = translations[currentLang].inputTitle;
         outputTitle.textContent = translations[currentLang].outputTitle;
         inputArea.placeholder = translations[currentLang].inputPlaceholder;
         citationControl.style.display = 'flex';
+        previewArea.style.display = 'block';
     } else {
         inputTitle.textContent = 'HTML 输入';
         outputTitle.textContent = 'Markdown 输出';
         inputArea.placeholder = translations[currentLang].inputPlaceholder;
         citationControl.style.display = 'none';
+        previewArea.style.display = 'none';
     }
 
     inputArea.value = '';
@@ -119,26 +132,31 @@ function switchMode() {
 
 function convert() {
     let input = document.getElementById('input-area').value;
-    const outputArea = document.getElementById('output-area');
+    const previewArea = document.getElementById('preview-area');
+    const rawArea = document.getElementById('raw-area');
     const removeCitationsChecked = document.getElementById('remove-citations').checked;
 
     if (currentMode === 'md2html') {
         if (removeCitationsChecked) {
             input = removeCitations(input);
         }
-        outputArea.textContent = marked.parse(input);
+        const htmlOutput = marked.parse(input);
+        previewArea.innerHTML = htmlOutput;
+        rawArea.textContent = htmlOutput;
     } else {
-        outputArea.textContent = turndownService.turndown(input);
+        const markdownOutput = turndownService.turndown(input);
+        previewArea.textContent = markdownOutput;
+        rawArea.textContent = markdownOutput;
     }
 }
 
 function copyOutput() {
-    const outputArea = document.getElementById('output-area');
-    const content = outputArea.textContent;
+    const rawArea = document.getElementById('raw-area');
+    const content = rawArea.textContent;
 
     navigator.clipboard.writeText(content)
-        .then(() => alert(translations[currentLang].copySuccess))
-        .catch(err => alert(translations[currentLang].copyError));
+        .then(() => showToast(translations[currentLang].copySuccess))
+        .catch(() => showToast(translations[currentLang].copyError));
 }
 
 function clearInput() {
@@ -147,7 +165,8 @@ function clearInput() {
 }
 
 function clearOutput() {
-    document.getElementById('output-area').innerHTML = '';
+    document.getElementById('preview-area').innerHTML = '';
+    document.getElementById('raw-area').textContent = '';
 }
 
 document.getElementById('input-area').addEventListener('input', convert);
@@ -155,3 +174,73 @@ document.getElementById('input-area').addEventListener('input', convert);
 // 初始化语言和主题
 updateLanguage();
 updateThemeIcon();
+initializeTheme();
+
+function switchTab(tab) {
+    const previewArea = document.getElementById('preview-area');
+    const rawArea = document.getElementById('raw-area');
+    const buttons = document.querySelectorAll('.tab-btn');
+    
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    if (tab === 'preview') {
+        previewArea.classList.add('active');
+        rawArea.classList.remove('active');
+        buttons[0].classList.add('active');
+    } else {
+        previewArea.classList.remove('active');
+        rawArea.classList.add('active');
+        buttons[1].classList.add('active');
+    }
+}
+
+function togglePreview() {
+    const previewArea = document.getElementById('preview-area');
+    const rawArea = document.getElementById('raw-area');
+    const previewBtn = document.querySelector('.preview-btn');
+    
+    const isPreviewMode = previewArea.classList.contains('active');
+    
+    if (isPreviewMode) {
+        previewArea.classList.remove('active');
+        rawArea.classList.add('active');
+        previewBtn.classList.remove('active');
+        previewBtn.textContent = translations[currentLang].preview;
+    } else {
+        previewArea.classList.add('active');
+        rawArea.classList.remove('active');
+        previewBtn.classList.add('active');
+        previewBtn.textContent = translations[currentLang].rawHtml;
+    }
+}
+
+// 添加 Toast 显示函数
+function showToast(message, duration = 2000) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, duration);
+}
+
+// 为输出区域添加点击复制功能
+function initializeOutputCopy() {
+    const outputWrapper = document.getElementById('output-wrapper');
+    outputWrapper.addEventListener('click', (e) => {
+        if (e.target.closest('.output')) {
+            const rawArea = document.getElementById('raw-area');
+            const content = rawArea.textContent;
+            
+            navigator.clipboard.writeText(content)
+                .then(() => showToast(translations[currentLang].copySuccess))
+                .catch(() => showToast(translations[currentLang].copyError));
+        }
+    });
+}
+
+// 在文件末尾初始化
+initializeOutputCopy();
