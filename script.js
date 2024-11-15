@@ -43,22 +43,27 @@ function initializeTheme() {
     updateThemeIcon();
 }
 
-function updateLanguage() {
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (key === 'removeCitations') {
-            element.innerHTML = i18n[currentLang][key];
-        } else {
-            element.textContent = i18n[currentLang][key];
-        }
-    });
+// 翻译函数
+function translateElement(element) {
+    const key = element.getAttribute('data-i18n');
+    if (!key) return;
+    
+    const translation = i18n[currentLang][key];
+    if (!translation) return;
+    
+    // 如果元素有 placeholder 属性，直接设置文本
+    if (element.hasAttribute('data-i18n-placeholder')) {
+        element.placeholder = translation;
+        return;
+    }
+    
+    // 对于其他元素，支持 HTML 内容
+    element.innerHTML = translation;
+}
 
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        element.placeholder = i18n[currentLang][key];
-    });
-
-    document.querySelector('.lang-switch').textContent = currentLang === 'zh' ? 'English' : '中文';
+// 更新页面上所有需要翻译的元素
+function updatePageLanguage() {
+    document.querySelectorAll('[data-i18n]').forEach(translateElement);
     document.title = i18n[currentLang].docTitle;
 }
 
@@ -68,7 +73,7 @@ function toggleLanguage() {
     window.history.pushState({}, '', newPath);
     currentLang = newLang;
     document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
-    updateLanguage();
+    updatePageLanguage();
     switchMode();
 }
 
@@ -154,7 +159,7 @@ function clearOutput() {
 document.getElementById('input-area').addEventListener('input', convert);
 
 // 初始化语言和主题
-updateLanguage();
+updatePageLanguage();
 updateThemeIcon();
 initializeTheme();
 

@@ -34,7 +34,16 @@ const i18n = {
         copyError: 'Copy failed, please copy manually',
         
         // 文档标题
-        docTitle: 'MD2HTML - Markdown Converter'
+        docTitle: 'MD2HTML - Markdown Converter',
+        
+        // Footer 部分
+        footerAboutTitle: "About MD2HTML",
+        footerAboutText: "MD2HTML is a free online tool that helps users easily convert between Markdown and HTML formats. The product is open source, feel free to send any feedback to <a href=\"mailto:hi@md2html.com\">hi@md2html.com</a>",
+        footerAgreementTitle: "User Agreement",
+        footerPrivacyPolicy: "Privacy Policy",
+        footerTerms: "Terms of Use",
+        footerContactTitle: "Contact Us",
+        footerCopyright: "© 2024 MD2HTML. All rights reserved."
     },
     zh: {
         // 页面标题和描述
@@ -71,7 +80,16 @@ const i18n = {
         copyError: '复制失败，请手动复制',
         
         // 文档标题
-        docTitle: 'MD2HTML - Markdown 转换工具'
+        docTitle: 'MD2HTML - Markdown 转换工具',
+        
+        // Footer 部分
+        footerAboutTitle: "关于 MD2HTML",
+        footerAboutText: "MD2HTML 是一个免费的在线工具，帮助用户在 Markdown 和 HTML 格式之间轻松转换。产品开源，欢迎反馈任何需求到 <a href=\"mailto:hi@md2html.com\">hi@md2html.com</a>",
+        footerAgreementTitle: "用户协议",
+        footerPrivacyPolicy: "隐私政策",
+        footerTerms: "使用条款",
+        footerContactTitle: "联系我们",
+        footerCopyright: "© 2024 MD2HTML. 保留所有权利。"
     }
 };
 
