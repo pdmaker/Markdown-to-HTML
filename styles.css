@@ -494,11 +494,37 @@ button:focus {
     opacity: 1;
 }
 
-/* 让输出区域看起来可点击 */
+/* 让输出区域看起来可点�� */
 #output-wrapper .output {
     cursor: pointer;
 }
 
 #output-wrapper .output:hover {
     background: var(--muted);
+}
+
+/* 添加链接样式 */
+.citation-control a {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 0.1em 0.3em;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+    font-weight: 500;
+    background: var(--muted);
+}
+
+.citation-control a:hover {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+
+[data-theme="dark"] .citation-control a {
+    color: var(--muted-foreground);
+    background: var(--muted);
+}
+
+[data-theme="dark"] .citation-control a:hover {
+    color: var(--background);
+    background: var(--foreground);
 }

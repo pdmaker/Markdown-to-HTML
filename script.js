@@ -4,7 +4,7 @@ const translations = {
         subtitle: 'Specially designed for Wordpress publishing, HTML page generation and more',
         md2html: 'Markdown to HTML',
         html2md: 'HTML to Markdown',
-        removeCitations: 'Remove Citations (From Perplexity.ai)',
+        removeCitations: 'Remove Citations (From <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" target="_blank">Perplexity.ai</a>)',
         inputTitle: 'Markdown Input',
         outputTitle: 'HTML Output',
         clearInput: 'Clear Input',
@@ -17,14 +17,15 @@ const translations = {
         preview: 'Preview HTML',
         togglePreview: 'Hide Preview',
         showPreview: 'Show Preview',
-        rawHtml: 'Show HTML'
+        rawHtml: 'Show HTML',
+        download: 'Download HTML'
     },
     zh: {
         title: 'Markdown 和 HTML 双向转换',
         subtitle: '特别用于 Wordpress 内容发表、HTML 网页生成等场景',
         md2html: 'Markdown 转 HTML',
         html2md: 'HTML 转 Markdown',
-        removeCitations: '去除引文(来自 Perplexity.ai)',
+        removeCitations: '去除引文(来自 <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" target="_blank">Perplexity.ai</a>)',
         inputTitle: 'Markdown 输入',
         outputTitle: 'HTML 输出',
         clearInput: '清空输入',
@@ -37,7 +38,8 @@ const translations = {
         preview: '预览 HTML',
         togglePreview: '隐藏预览',
         showPreview: '显示预览',
-        rawHtml: '显示 HTML'
+        rawHtml: '显示 HTML',
+        download: '下载 HTML'
     }
 };
 
@@ -75,7 +77,7 @@ function initializeTheme() {
 function updateLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        element.textContent = translations[currentLang][key];
+        element.innerHTML = translations[currentLang][key];
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
@@ -244,3 +246,62 @@ function initializeOutputCopy() {
 
 // 在文件末尾初始化
 initializeOutputCopy();
+
+// 添加下载 HTML 功能
+function downloadHtml() {
+    const rawArea = document.getElementById('raw-area');
+    const content = rawArea.textContent;
+    
+    // 创建完整的 HTML 文档
+    const fullHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated HTML</title>
+    <style>
+        body {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    ${content}
+</body>
+</html>`;
+
+    // 创建 Blob 对象
+    const blob = new Blob([fullHtml], { type: 'text/html' });
+    
+    // 创建下载链接
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'converted.html';
+    
+    // 触发下载
+    document.body.appendChild(a);
+    a.click();
+    
+    // 清理
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    
+    // 显示提示
+    showToast(translations[currentLang].copySuccess);
+}
