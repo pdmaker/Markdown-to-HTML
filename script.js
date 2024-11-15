@@ -1,47 +1,4 @@
-const translations = {
-    en: {
-        title: 'Markdown and HTML Converter',
-        subtitle: 'Specially designed for Wordpress publishing, HTML page generation and more',
-        md2html: 'Markdown to HTML',
-        html2md: 'HTML to Markdown',
-        removeCitations: 'Remove Citations (From <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" class="perplexity-link" target="_blank" rel="noopener">Perplexity.ai</a>)',
-        inputTitle: 'Markdown Input',
-        outputTitle: 'HTML Output',
-        clearInput: 'Clear Input',
-        clearOutput: 'Clear Output',
-        inputPlaceholder: 'Enter your content here...',
-        convert: 'Convert',
-        copy: 'Copy Output',
-        copySuccess: 'Content copied to clipboard!',
-        copyError: 'Copy failed, please copy manually',
-        preview: 'Preview HTML',
-        togglePreview: 'Hide Preview',
-        showPreview: 'Show Preview',
-        rawHtml: 'Show HTML',
-        download: 'Download HTML'
-    },
-    zh: {
-        title: 'Markdown 和 HTML 双向转换',
-        subtitle: '特别用于 Wordpress 内容发表、HTML 网页生成等场景',
-        md2html: 'Markdown 转 HTML',
-        html2md: 'HTML 转 Markdown',
-        removeCitations: '去除引文(来自 <a href="https://perplexity.ai/pro?referral_code=6AU5QB68" class="perplexity-link" target="_blank" rel="noopener">Perplexity.ai</a>)',
-        inputTitle: 'Markdown 输入',
-        outputTitle: 'HTML 输出',
-        clearInput: '清空输入',
-        clearOutput: '清空输出',
-        inputPlaceholder: '在这里输入内容...',
-        convert: '转换',
-        copy: '复制输出',
-        copySuccess: '内容已复制到剪贴板！',
-        copyError: '复制失败，请手动复制',
-        preview: '预览 HTML',
-        togglePreview: '隐藏预览',
-        showPreview: '显示预览',
-        rawHtml: '显示 HTML',
-        download: '下载 HTML'
-    }
-};
+import i18n from './i18n.js';
 
 let currentLang = 'zh';
 
@@ -90,19 +47,19 @@ function updateLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (key === 'removeCitations') {
-            element.innerHTML = translations[currentLang][key];
+            element.innerHTML = i18n[currentLang][key];
         } else {
-            element.textContent = translations[currentLang][key];
+            element.textContent = i18n[currentLang][key];
         }
     });
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
         const key = element.getAttribute('data-i18n-placeholder');
-        element.placeholder = translations[currentLang][key];
+        element.placeholder = i18n[currentLang][key];
     });
 
     document.querySelector('.lang-switch').textContent = currentLang === 'zh' ? 'English' : '中文';
-    document.title = currentLang === 'zh' ? 'MD2HTML - Markdown 转换工具' : 'MD2HTML - Markdown Converter';
+    document.title = i18n[currentLang].docTitle;
 }
 
 function toggleLanguage() {
@@ -131,15 +88,15 @@ function switchMode() {
     const previewArea = document.getElementById('preview-area');
 
     if (currentMode === 'md2html') {
-        inputTitle.textContent = translations[currentLang].inputTitle;
-        outputTitle.textContent = translations[currentLang].outputTitle;
-        inputArea.placeholder = translations[currentLang].inputPlaceholder;
+        inputTitle.textContent = i18n[currentLang].inputTitle;
+        outputTitle.textContent = i18n[currentLang].outputTitle;
+        inputArea.placeholder = i18n[currentLang].inputPlaceholder;
         citationControl.style.display = 'flex';
         previewArea.style.display = 'block';
     } else {
         inputTitle.textContent = 'HTML 输入';
         outputTitle.textContent = 'Markdown 输出';
-        inputArea.placeholder = translations[currentLang].inputPlaceholder;
+        inputArea.placeholder = i18n[currentLang].inputPlaceholder;
         citationControl.style.display = 'none';
         previewArea.style.display = 'none';
     }
@@ -176,8 +133,8 @@ function copyOutput() {
     const content = rawArea.textContent;
 
     navigator.clipboard.writeText(content)
-        .then(() => showToast(translations[currentLang].copySuccess))
-        .catch(() => showToast(translations[currentLang].copyError));
+        .then(() => showToast(i18n[currentLang].copySuccess))
+        .catch(() => showToast(i18n[currentLang].copyError));
 }
 
 function clearInput() {
@@ -232,12 +189,12 @@ function togglePreview() {
         previewArea.classList.remove('active');
         rawArea.classList.add('active');
         previewBtn.classList.remove('active');
-        previewBtn.textContent = translations[currentLang].preview;
+        previewBtn.textContent = i18n[currentLang].preview;
     } else {
         previewArea.classList.add('active');
         rawArea.classList.remove('active');
         previewBtn.classList.add('active');
-        previewBtn.textContent = translations[currentLang].rawHtml;
+        previewBtn.textContent = i18n[currentLang].rawHtml;
     }
 }
 
@@ -261,8 +218,8 @@ function initializeOutputCopy() {
             const content = rawArea.textContent;
             
             navigator.clipboard.writeText(content)
-                .then(() => showToast(translations[currentLang].copySuccess))
-                .catch(() => showToast(translations[currentLang].copyError));
+                .then(() => showToast(i18n[currentLang].copySuccess))
+                .catch(() => showToast(i18n[currentLang].copyError));
         }
     });
 }
@@ -326,7 +283,7 @@ function downloadHtml() {
     document.body.removeChild(a);
     
     // 显示提示
-    showToast(translations[currentLang].copySuccess);
+    showToast(i18n[currentLang].copySuccess);
 }
 
 // 添加按钮状态控制函数
@@ -345,3 +302,14 @@ updateButtonStates();
 
 // 确保在 DOM 加载完成后初始化主题
 document.addEventListener('DOMContentLoaded', initializeTheme);
+
+// 将需要在 HTML 中调用的函数暴露到全局作用域
+window.toggleTheme = toggleTheme;
+window.toggleLanguage = toggleLanguage;
+window.switchMode = switchMode;
+window.convert = convert;
+window.copyOutput = copyOutput;
+window.clearInput = clearInput;
+window.clearOutput = clearOutput;
+window.togglePreview = togglePreview;
+window.downloadHtml = downloadHtml;
