@@ -88,14 +88,76 @@
         </div>
     </footer>
 
-    <script>
-        // 动态导入模块
-        import('./script.js').then(module => {
-            // 将模块中的函数挂载到全局 window 对象上
-            window.toggleTheme = module.toggleTheme;
-            window.toggleLanguage = module.toggleLanguage;
+    <script type="module">
+        import i18n from './i18n.js';
+        
+        let currentLang = 'zh';
+        
+        // 初始化语言和翻译
+        function initializeLanguage() {
+            // 检查当前 URL 是否包含 /en
+            const isEnglish = window.location.pathname.includes('/en');
+            currentLang = isEnglish ? 'en' : 'zh';
             
-            // 初始化主题和语言状态
+            // 设置 HTML 语言属性
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            
+            // 翻译所有带有 data-i18n 属性的元素
+            updatePageLanguage();
+            
+            // 更新语言切换按钮文本
+            const langSwitch = document.querySelector('.lang-switch');
+            if (langSwitch) {
+                langSwitch.textContent = currentLang === 'zh' ? 'English' : '中文';
+            }
+        }
+
+        // 更新页面语言
+        function updatePageLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = i18n[currentLang][key];
+                if (translation) {
+                    element.innerHTML = translation;
+                }
+            });
+            
+            // 更新页面标题
+            document.title = i18n[currentLang].termsTitle;
+        }
+
+        // 切换主题函数
+        window.toggleTheme = function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const themeIcon = document.querySelector('.theme-icon');
+            if (themeIcon) {
+                themeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            }
+        };
+
+        // 切换语言函数
+        window.toggleLanguage = function() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            const newPath = currentLang === 'en' ? '/en/terms.html' : '/terms.html';
+            window.history.pushState({}, '', newPath);
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            updatePageLanguage();
+            
+            // 更新语言切换按钮文本
+            const langSwitch = document.querySelector('.lang-switch');
+            if (langSwitch) {
+                langSwitch.textContent = currentLang === 'zh' ? 'English' : '中文';
+            }
+        };
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 设置保存的主题
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
             
@@ -105,9 +167,8 @@
                 themeIcon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
             }
             
-            // 设置正确的语言
-            const currentLang = window.location.pathname.includes('/en') ? 'en' : 'zh';
-            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            // 初始化语言
+            initializeLanguage();
         });
     </script>
     <div class="toast" id="toast"></div>
