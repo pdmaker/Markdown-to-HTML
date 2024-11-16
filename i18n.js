@@ -44,6 +44,9 @@ const i18n = {
         footerTerms: "Terms of Use",
         footerContactTitle: "Contact Us",
         footerCopyright: "© 2024 MD2HTML. All rights reserved.",
+        footerFriendlyLinks: "Friendly Links",
+        footerWatermark: "Watermark Adder",
+        footerResearchTitle: "Research Title Generator",
         
         // 隐私政策翻译
         privacyTitle: "Privacy Policy - MD2HTML",
@@ -116,6 +119,9 @@ const i18n = {
         footerTerms: "使用条款",
         footerContactTitle: "联系我们",
         footerCopyright: "© 2024 MD2HTML. 保留所有权利。",
+        footerFriendlyLinks: "友情链接",
+        footerWatermark: "水印添加器",
+        footerResearchTitle: "论文标题生成器",
         
         // 隐私政策翻译
         privacyTitle: "隐私政策 - MD2HTML",
@@ -141,7 +147,10 @@ const i18n = {
         disclaimerTitle: "免责声明",
         disclaimerText: "本工具按现状提供，我们不对转换结果的准确性做出保证。请在使用转换后的内容前自行检查。我们不对使用本工具造成的任何直接或间接损失负责",
         updatesTitle: "条款更新", 
-        updatesText: "我们保留随时更新这些条款的权利。重大变更会通过网站公告通知用户。继续使用本工具即表示您同意接受新的条款内容"
+        updatesText: "我们保留随时更新这些条款的权利。重大变更会通过网站公告通知用户。继续使用本工具即表示您同意接受新的条款内容",
+        footerFriendlyLinks: "友情链接",
+        footerWatermark: "水印添加器",
+        footerResearchTitle: "论文标题生成器"
     }
 };
 
