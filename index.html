@@ -92,7 +92,46 @@
                     <h2 id="input-title" data-i18n="inputTitle">Markdown 输入</h2>
                     <button onclick="clearInput()" data-i18n="clearInput">清空输入</button>
                 </div>
-                <textarea id="input-area" data-i18n-placeholder="inputPlaceholder" placeholder="在这里输入内容..."></textarea>
+                <textarea id="input-area" data-i18n-placeholder="inputPlaceholder" placeholder="在这里输入内容...">
+# Sample Markdown
+
+This is some basic, sample markdown.
+
+## Second Heading
+
+ * Unordered lists, and:
+  1. One
+  1. Two
+  1. Three
+ * More
+
+> Blockquote
+
+And **bold**, *italics*, and even *italics and later **bold***. Even ~~strikethrough~~. [A link](https://md2html.com) to somewhere.
+
+And code highlighting:
+
+
+```js
+var foo = 'bar';
+
+function baz(s) {
+   return foo + ':' + s;
+}
+```
+
+Or inline code like `var foo = 'bar';`.
+
+Or an image of logo
+
+![MD2HTML](https://md2html.com/images/logo.png)
+
+The end ...
+                </textarea>
+                <div class="input-buttons">
+                    <button onclick="convert()" data-i18n="convert">立即转换</button>
+                    <button onclick="clearInput()" data-i18n="clearInput">清空输入</button>
+                </div>
             </div>
             <div>
                 <div class="output-label">
@@ -103,12 +142,11 @@
                     <div id="raw-area" class="output active"></div>
                     <div id="preview-area" class="output"></div>
                 </div>
+                <div class="output-buttons">
+                    <button onclick="copyOutput()" data-i18n="copy">复制输出</button>
+                    <button onclick="downloadHtml()" data-i18n="download">下载 HTML</button>
+                </div>
             </div>
-        </div>
-        <div class="buttons">
-            <button onclick="convert()" data-i18n="convert">转换</button>
-            <button onclick="copyOutput()" data-i18n="copy">复制输出</button>
-            <button onclick="downloadHtml()" data-i18n="download">下载 HTML</button>
         </div>
     </div>
 

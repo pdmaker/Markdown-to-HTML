@@ -72,7 +72,8 @@ const i18n = {
         disclaimerTitle: "Disclaimer",
         disclaimerText: "This tool is provided 'as is', we make no guarantees about the accuracy of conversion results. Please check the converted content before use. We are not responsible for any direct or indirect losses caused by using this tool.",
         updatesTitle: "Terms Updates",
-        updatesText: "We reserve the right to update these terms at any time. Major changes will be notified to users through website announcements. Continued use of this tool indicates your acceptance of the new terms."
+        updatesText: "We reserve the right to update these terms at any time. Major changes will be notified to users through website announcements. Continued use of this tool indicates your acceptance of the new terms.",
+        langSwitchText: '中文'
     },
     zh: {
         // 页面标题和描述
@@ -150,7 +151,8 @@ const i18n = {
         updatesText: "我们保留随时更新这些条款的权利。重大变更会通过网站公告通知用户。继续使用本工具即表示您同意接受新的条款内容",
         footerFriendlyLinks: "友情链接",
         footerWatermark: "水印添加器",
-        footerResearchTitle: "论文标题生成器"
+        footerResearchTitle: "论文标题生成器",
+        langSwitchText: 'English'
     }
 };
 

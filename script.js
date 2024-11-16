@@ -65,6 +65,10 @@ function translateElement(element) {
 function updatePageLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(translateElement);
     document.title = i18n[currentLang].docTitle;
+    
+    // 更新语言切换按钮文本
+    const langSwitchBtn = document.querySelector('.lang-switch');
+    langSwitchBtn.textContent = i18n[currentLang].langSwitchText;
 }
 
 function toggleLanguage() {
@@ -73,8 +77,27 @@ function toggleLanguage() {
     window.history.pushState({}, '', newPath);
     currentLang = newLang;
     document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+    
+    // 保存当前输入框的内容
+    const currentInput = document.getElementById('input-area').value;
+    
+    // 更新页面语言
     updatePageLanguage();
+    
+    // 更新语言切换按钮文本
+    const langSwitchBtn = document.querySelector('.lang-switch');
+    langSwitchBtn.textContent = i18n[currentLang].langSwitchText;
+    
+    // 恢复输入框的内容
+    document.getElementById('input-area').value = currentInput;
+    
+    // 更新模式选择
     switchMode();
+    
+    // 如果输入框有内容，重新执行转换
+    if (currentInput.trim()) {
+        convert();
+    }
 }
 
 const turndownService = new TurndownService();
@@ -106,8 +129,10 @@ function switchMode() {
         previewArea.style.display = 'none';
     }
 
-    inputArea.value = '';
-    document.getElementById('output-area').innerHTML = '';
+    // 如果有内容，重新执行转换
+    if (inputArea.value.trim()) {
+        convert();
+    }
 }
 
 function convert() {
@@ -319,7 +344,7 @@ window.clearOutput = clearOutput;
 window.togglePreview = togglePreview;
 window.downloadHtml = downloadHtml;
 
-// 导出这些函数以供模块化使用
+// 导些函数以供模块化使用
 export {
     toggleTheme,
     toggleLanguage,
@@ -331,3 +356,19 @@ export {
     togglePreview,
     downloadHtml
 };
+
+// 在文件开头添加这个函数
+function initializeWithDefaultContent() {
+    // 获取输入内容
+    const input = document.getElementById('input-area').value;
+    if (input.trim()) {
+        // 如果有默认内容，自动执行转换
+        convert();
+    }
+}
+
+// 在 DOMContentLoaded 事件中调用初始化函数
+document.addEventListener('DOMContentLoaded', () => {
+    initializeWithDefaultContent();
+    updatePageLanguage(); // 确保语言切换按钮文本被正确设置
+});

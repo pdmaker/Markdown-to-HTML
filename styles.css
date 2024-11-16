@@ -841,3 +841,85 @@ button:disabled {
         font-size: 1.25rem;
     }
 }
+
+/* 列表样式 */
+ul, ol {
+    padding-left: 2em;
+    margin: 1em 0;
+}
+
+/* 嵌套列表的样式 */
+ul ul, 
+ul ol,
+ol ul,
+ol ol {
+    margin: 0.5em 0;
+    padding-left: 2em;
+}
+
+/* 列表项样式 */
+li {
+    margin: 0.5em 0;
+}
+
+/* 引用块样式 */
+blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    border-left: 4px solid #ddd;
+    background-color: #f8f9fa;
+    color: #555;
+}
+
+/* 深色模式下的引用块样式 */
+[data-theme="dark"] blockquote {
+    background-color: #1a1a1a;
+    border-left-color: #444;
+    color: #bbb;
+}
+
+/* 预览区域样式 */
+#preview-area {
+    padding: 2em;
+    line-height: 1.6;
+}
+
+/* 确保预览区域内的列表和引用块样式正确显示 */
+#preview-area ul,
+#preview-area ol {
+    padding-left: 2em;
+    margin: 1em 0;
+}
+
+#preview-area blockquote {
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+}
+
+/* 输入区域按钮组 */
+.input-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* 输出区域按钮组 */
+.output-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* 确保按钮样式一致 */
+.input-buttons button,
+.output-buttons button {
+    flex: 1;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+    .input-buttons,
+    .output-buttons {
+        flex-direction: column;
+    }
+}
