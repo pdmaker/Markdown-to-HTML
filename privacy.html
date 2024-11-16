@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="privacyTitle">隐私政策 - MD2HTML</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 导入导航栏 -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- 页面主要内容 -->
+    <div class="main-content policy-content">
+        <h1 data-i18n="privacyTitle">隐私政策</h1>
+        
+        <section class="policy-section">
+            <h2 data-i18n="privacyIntroTitle">隐私保护承诺</h2>
+            <p data-i18n="privacyIntroText">MD2HTML 高度重视用户隐私保护。我们的工具是一个纯前端应用程序，所有数据处理都在您的浏览器本地完成，不会将任何内容传输到服务器。</p>
+        </section>
+
+        <section class="policy-section">
+            <h2 data-i18n="dataCollectionTitle">数据收集</h2>
+            <p data-i18n="dataCollectionText">我们不收集任何用户数据。您在工具中输入的所有内容都只在您的浏览器中进行处理，我们无法访问这些内容。</p>
+        </section>
+
+        <section class="policy-section">
+            <h2 data-i18n="localStorageTitle">本地存储</h2>
+            <p data-i18n="localStorageText">我们仅使用浏览器的本地存储（localStorage）来保存您的主题偏好设置（深色/浅色模式）和语言选择。这些数据完全存储在您的设备上，我们无法访问。</p>
+        </section>
+
+        <section class="policy-section">
+            <h2 data-i18n="noAccountTitle">无需账户</h2>
+            <p data-i18n="noAccountText">我们的工具无需注册或登录即可使用，因此我们不会收集任何个人身份信息。</p>
+        </section>
+
+        <section class="policy-section">
+            <h2 data-i18n="securityTitle">安全性</h2>
+            <p data-i18n="securityText">由于所有操作都在本地完成，您的内容始终保持私密。我们建议您在处理敏感信息时，确保使用可信的设备和浏览器。</p>
+        </section>
+    </div>
+
+    <!-- 导入 Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script type="module" src="script.js"></script>
+    <script>
+        // 加载模板内容
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/template.html')
+                .then(response => response.text())
+                .then(html => {
+                    const template = new DOMParser().parseFromString(html, 'text/html');
+                    
+                    // 插入导航栏
+                    document.getElementById('navbar-placeholder').innerHTML = 
+                        template.querySelector('nav.navbar').outerHTML;
+                    
+                    // 插入 Footer
+                    document.getElementById('footer-placeholder').innerHTML = 
+                        template.querySelector('footer.footer').outerHTML;
+                });
+        });
+    </script>
+</body>
+</html> 

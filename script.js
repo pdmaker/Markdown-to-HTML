@@ -308,7 +308,7 @@ updateButtonStates();
 // 确保在 DOM 加载完成后初始化主题
 document.addEventListener('DOMContentLoaded', initializeTheme);
 
-// 将需要在 HTML 中调用的函数暴露到全局作用域
+// 将函数直接挂载到 window 对象上，确保全局可用
 window.toggleTheme = toggleTheme;
 window.toggleLanguage = toggleLanguage;
 window.switchMode = switchMode;
@@ -318,3 +318,16 @@ window.clearInput = clearInput;
 window.clearOutput = clearOutput;
 window.togglePreview = togglePreview;
 window.downloadHtml = downloadHtml;
+
+// 导出这些函数以供模块化使用
+export {
+    toggleTheme,
+    toggleLanguage,
+    switchMode,
+    convert,
+    copyOutput,
+    clearInput,
+    clearOutput,
+    togglePreview,
+    downloadHtml
+};
