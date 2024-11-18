@@ -103,8 +103,9 @@ function toggleLanguage() {
 const turndownService = new TurndownService();
 let currentMode = 'md2html';
 
-function removeCitations(text) {
-    return text.replace(/^Citations:\s*(\n\[\d+\].*)*$/m, '').trim();
+function removeCitations(markdown) {
+    // 移除类似 [1][2] 或 [1,2,3] 格式的引文标记
+    return markdown.replace(/\[[\d,\s]+\](?:\[\d+\])?/g, '');
 }
 
 function switchMode() {
@@ -136,26 +137,32 @@ function switchMode() {
 }
 
 function convert() {
-    let input = document.getElementById('input-area').value;
-    const previewArea = document.getElementById('preview-area');
-    const rawArea = document.getElementById('raw-area');
-    const removeCitationsChecked = document.getElementById('remove-citations').checked;
-
-    if (currentMode === 'md2html') {
-        if (removeCitationsChecked) {
-            input = removeCitations(input);
-        }
-        const htmlOutput = marked.parse(input);
-        previewArea.innerHTML = htmlOutput;
-        rawArea.textContent = htmlOutput;
-    } else {
-        const markdownOutput = turndownService.turndown(input);
-        previewArea.textContent = markdownOutput;
-        rawArea.textContent = markdownOutput;
+    const input = document.getElementById('input-area').value;
+    const mode = document.getElementById('convert-mode').value;
+    const removeCitationsEnabled = document.getElementById('remove-citations').checked;
+    
+    let processedInput = input;
+    
+    // 如果启用了去除引文选项，先处理引文
+    if (removeCitationsEnabled) {
+        processedInput = removeCitations(processedInput);
     }
     
-    // 更新按钮状态
-    updateButtonStates();
+    let output = '';
+    if (mode === 'md2html') {
+        output = marked.parse(processedInput);
+    } else {
+        const turndownService = new TurndownService();
+        output = turndownService.turndown(processedInput);
+    }
+    
+    const rawArea = document.getElementById('raw-area');
+    rawArea.textContent = output;
+    
+    const previewArea = document.getElementById('preview-area');
+    previewArea.innerHTML = output;
+    
+    showToast(i18n.t('convertSuccess'));
 }
 
 function copyOutput() {
