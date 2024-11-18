@@ -54,11 +54,7 @@ npx serve
 
 ## 贡献指南
 
-欢迎提交 Pull Requests 来改进这个项目。在提交之前，请确保：
-
-1. 代码符合现有的代码风格
-2. 更新相关文档
-3. 添加必要的测试用例
+欢迎提交 Pull Requests 来改进这个项目。
 
 ## 许可证
 
@@ -68,7 +64,7 @@ MIT License - 查看 [LICENSE](LICENSE) 文件了解详情
 
 如有问题或建议，请通过以下方式联系：
 
-- 提交 Issue
+- 提交 Issue（推荐）
 - 发送邮件至：[hi@md2html.com](mailto:hi@md2html.com)
 
 ## 致谢
