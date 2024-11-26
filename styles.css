@@ -107,7 +107,7 @@ body {
 
 textarea {
     width: 100%;
-    height: 500px;
+    height: 400px;
     padding: 0.75rem;
     background-color: var(--background);
     border: 1px solid var(--border);
@@ -127,7 +127,7 @@ textarea:focus {
 }
 
 .output {
-    height: 500px;
+    height: 400px;
     padding: 0.75rem;
     background-color: var(--muted);
     border: 1px solid var(--border);
@@ -383,7 +383,7 @@ button:focus {
 #output-wrapper {
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    height: 500px;
+    height: 400px;
     position: relative;
     margin-top: 0;
 }
@@ -394,7 +394,7 @@ button:focus {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 100%;
+    height: 300px;
     padding: 1rem;
     display: none;
     overflow-y: auto;
@@ -408,6 +408,9 @@ button:focus {
 /* 预览模式下的样式 */
 #preview-area {
     white-space: normal;
+    height: 300px;
+    padding: 1rem;
+    line-height: 1.6;
 }
 
 #preview-area h1,
@@ -468,7 +471,7 @@ button:focus {
 #output-wrapper {
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    height: 500px;
+    height: 400px;
     position: relative;
 }
 
@@ -478,7 +481,7 @@ button:focus {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 100%;
+    height: 300px;
     padding: 1rem;
     display: none;
     overflow-y: auto;
@@ -615,7 +618,7 @@ button:focus {
     }
 
     .logo {
-        font-size: 1.25rem;  /* 稍微减小 logo 字体大小 */
+        font-size: 1.25rem;  /* 稍微减小 logo 字体小 */
     }
 
     .navbar-controls {
@@ -896,24 +899,40 @@ blockquote {
     padding: 1em 1.5em;
 }
 
+/* 左右两个主容器的样式 */
+.container > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+}
+
+/* 文本区域和输出区域的样式 */
+textarea, #output-wrapper {
+    flex: 1;  /* 让文本区域和输出区域占据剩余空间 */
+    height: 300px; /* 统一设置为 300px */
+    margin-bottom: 1rem;
+}
+
 /* 输入区域按钮组 */
 .input-buttons {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: auto; /* 将按钮组推到底部 */
 }
 
 /* 输出区域按钮组 */
 .output-buttons {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: auto; /* 将按钮组推到底部 */
 }
 
 /* 确保按钮样式一致 */
 .input-buttons button,
 .output-buttons button {
     flex: 1;
+    min-width: 0;
+    white-space: nowrap;
 }
 
 /* 移动端适配 */

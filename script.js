@@ -105,7 +105,18 @@ let currentMode = 'md2html';
 
 function removeCitations(markdown) {
     // 移除类似 [1][2] 或 [1,2,3] 格式的引文标记
-    return markdown.replace(/\[[\d,\s]+\](?:\[\d+\])?/g, '');
+    let processed = markdown;
+    
+    // 移除 Citations: 标题及其下方的引文列表
+    processed = processed.replace(/Citations:\s*(\n\[\d+\].*)*$/gm, '');
+    
+    // 移除文本中的引文标记
+    processed = processed.replace(/\[[\d,\s]+\](?:\[\d+\])?/g, '');
+    
+    // 移除空行
+    processed = processed.replace(/^\s*[\r\n]/gm, '\n');
+    
+    return processed.trim();
 }
 
 function switchMode() {
@@ -162,7 +173,10 @@ function convert() {
     const previewArea = document.getElementById('preview-area');
     previewArea.innerHTML = output;
     
-    showToast(i18n.t('convertSuccess'));
+    // 更新按钮状态
+    updateButtonStates();
+    
+    showToast(i18n[currentLang].convertSuccess);
 }
 
 function copyOutput() {
@@ -323,15 +337,18 @@ function downloadHtml() {
     showToast(i18n[currentLang].copySuccess);
 }
 
-// 添加按钮状态控制函数
+// 修改按钮状态更新函数
 function updateButtonStates() {
     const rawArea = document.getElementById('raw-area');
-    const copyButton = document.querySelector('button[onclick="copyOutput()"]');
-    const downloadButton = document.querySelector('button[onclick="downloadHtml()"]');
+    const copyButton = document.querySelector('.output-buttons button[data-i18n="copy"]');
+    const downloadButton = document.querySelector('.output-buttons button[data-i18n="download"]');
     
-    const isEmpty = !rawArea.textContent.trim();
-    copyButton.disabled = isEmpty;
-    downloadButton.disabled = isEmpty;
+    // 检查输出区域是否有内容
+    const hasContent = rawArea.textContent.trim().length > 0;
+    
+    // 根据内容状态启用/禁用按钮
+    if (copyButton) copyButton.disabled = !hasContent;
+    if (downloadButton) downloadButton.disabled = !hasContent;
 }
 
 // 初始化时调用一次
