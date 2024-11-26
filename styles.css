@@ -107,10 +107,10 @@ body {
 
 textarea {
     width: 100%;
-    height: 400px;
+    height: 300px;
     padding: 0.75rem;
     background-color: var(--background);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: var(--radius);
     color: var(--foreground);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -120,10 +120,12 @@ textarea {
     transition: all 0.2s ease;
 }
 
+/* 修改聚焦时的样式 */
 textarea:focus {
     outline: none;
-    border-color: var(--ring);
-    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+    border-color: var(--primary);
+    border-width: 2px;
+    box-shadow: none;
 }
 
 .output {
