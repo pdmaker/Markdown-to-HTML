@@ -386,8 +386,32 @@ function initializeWithDefaultContent() {
     // 获取输入内容
     const input = document.getElementById('input-area').value;
     if (input.trim()) {
-        // 如果有默认内容，自动执行转换
-        convert();
+        // 如果有默认内容，静默执行转换，不显示 Toast
+        const mode = document.getElementById('convert-mode').value;
+        const removeCitationsEnabled = document.getElementById('remove-citations').checked;
+        
+        let processedInput = input;
+        
+        if (removeCitationsEnabled) {
+            processedInput = removeCitations(processedInput);
+        }
+        
+        let output = '';
+        if (mode === 'md2html') {
+            output = marked.parse(processedInput);
+        } else {
+            const turndownService = new TurndownService();
+            output = turndownService.turndown(processedInput);
+        }
+        
+        const rawArea = document.getElementById('raw-area');
+        rawArea.textContent = output;
+        
+        const previewArea = document.getElementById('preview-area');
+        previewArea.innerHTML = output;
+        
+        // 更新按钮状态
+        updateButtonStates();
     }
 }
 
