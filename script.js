@@ -104,7 +104,6 @@ const turndownService = new TurndownService();
 let currentMode = 'md2html';
 
 function removeCitations(markdown) {
-    // 移除类似 [1][2] 或 [1,2,3] 格式的引文标记
     let processed = markdown;
     
     // 移除 Citations: 标题及其下方的引文列表
@@ -113,8 +112,14 @@ function removeCitations(markdown) {
     // 移除文本中的引文标记
     processed = processed.replace(/\[[\d,\s]+\](?:\[\d+\])?/g, '');
     
+    // 移除 Perplexity 特有的 ***** 格式（包括可能的空格）
+    processed = processed.replace(/\*{4,}\s*([^\n]+)/g, '$1'); // 添加 \s* 来匹配可选的空格
+    
     // 移除空行
     processed = processed.replace(/^\s*[\r\n]/gm, '\n');
+    
+    // 移除多余的空行（超过两个连续空行变成两个）
+    processed = processed.replace(/\n{3,}/g, '\n\n');
     
     return processed.trim();
 }
@@ -193,6 +198,8 @@ function clearInput() {
     convert();
     // 更新按钮状态
     updateButtonStates();
+    // 添加清空提示
+    showToast(i18n[currentLang].clearSuccess);
 }
 
 function clearOutput() {
@@ -200,6 +207,8 @@ function clearOutput() {
     document.getElementById('raw-area').textContent = '';
     // 更新按钮状态
     updateButtonStates();
+    // 添加清空提示
+    showToast(i18n[currentLang].clearSuccess);
 }
 
 document.getElementById('input-area').addEventListener('input', convert);

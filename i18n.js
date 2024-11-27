@@ -73,7 +73,11 @@ const i18n = {
         disclaimerText: "This tool is provided 'as is', we make no guarantees about the accuracy of conversion results. Please check the converted content before use. We are not responsible for any direct or indirect losses caused by using this tool.",
         updatesTitle: "Terms Updates",
         updatesText: "We reserve the right to update these terms at any time. Major changes will be notified to users through website announcements. Continued use of this tool indicates your acceptance of the new terms.",
-        langSwitchText: '中文'
+        langSwitchText: '中文',
+        convertSuccess: 'Conversion successful!',
+        copySuccess: 'Copied to clipboard!',
+        copyError: 'Copy failed, please copy manually',
+        clearSuccess: 'Content cleared',
     },
     zh: {
         // 页面标题和描述
@@ -152,7 +156,11 @@ const i18n = {
         footerFriendlyLinks: "友情链接",
         footerWatermark: "水印添加器",
         footerResearchTitle: "论文标题生成器",
-        langSwitchText: 'English'
+        langSwitchText: 'English',
+        convertSuccess: '转换成功！',
+        copySuccess: '已复制到剪贴板！',
+        copyError: '复制失败，请手动复制',
+        clearSuccess: '已清空内容',
     }
 };
 
