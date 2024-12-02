@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面未找到 - 404</title>
+    <style>
+        /* 亮色主题（默认） */
+        :root {
+            --background: #ffffff;
+            --foreground: #020817;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --primary: #18181b;
+            --primary-foreground: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        /* 暗色主题 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #020817;
+                --foreground: #ffffff;
+                --muted: #1e293b;
+                --muted-foreground: #94a3b8;
+                --primary: #ffffff;
+                --primary-foreground: #020817;
+                --border: #1e293b;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--background);
+            color: var(--foreground);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--foreground);
+            letter-spacing: -0.025em;
+        }
+
+        .site-description {
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--foreground);
+            letter-spacing: -0.025em;
+        }
+
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--muted-foreground);
+            line-height: 1.5;
+        }
+
+        a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            transition: opacity 0.2s ease;
+        }
+
+        a:hover {
+            opacity: 0.9;
+            text-decoration: none;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 640px) {
+            .brand {
+                gap: 0.5rem;
+            }
+
+            .logo-image {
+                width: 32px;
+                height: 32px;
+            }
+
+            .brand-name {
+                font-size: 1.25rem;
+            }
+
+            .site-description {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        /* 添加分隔线样式 */
+        .divider {
+            width: 60%;
+            height: 1px;
+            background-color: var(--border);
+            margin: 2rem auto;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand">
+            <img src="images/logo.png" alt="Logo" class="logo-image">
+            <span class="brand-name">MD2HTML</span>
+        </div>
+        <p class="site-description">
+            一个简单易用的 AI 对话格式转换工具（Markdown 转成 HTML），帮助你快速整理和分享 AI 对话内容，并用于博客、论坛、文档等。  
+        </p>
+        <div class="divider"></div>
+        <h1>404</h1>
+        <p>抱歉，您访问的页面不存在</p>
+        <a href="/">返回首页试试看</a>
+    </div>
+</body>
+</html> 
